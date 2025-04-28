@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_owncloud_folder,owncloud.folder,model_owncloud_folder,,1,1,1,1
+access_owncloud_connector,owncloud.connector,model_owncloud_connector,,1,1,1,0

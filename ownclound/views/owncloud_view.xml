@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem name="Owncloud" id="menu_owncloud" web_icon="ownclound,static/description/ownclound.png" sequence="17" />
+    <!-- owncloud folder -->
+    <record id="owncloud_folder_search" model="ir.ui.view">
+        <field name="name">owncloud.folder.view.search</field>
+        <field name="model">owncloud.folder</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="user_id" />
+            </search>
+        </field>
+    </record>
+
+    <record id="owncloud_folder_tree" model="ir.ui.view">
+        <field name="name">owncloud.folder.view.tree</field>
+        <field name="model">owncloud.folder</field>
+        <field name="arch" type="xml">
+            <tree string="Folders">
+                <field name="name" />
+                <field name="user_id" />
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="owncloud_folder_view" model="ir.ui.view">
+        <field name="name">owncloud.folder.view.form</field>
+        <field name="model">owncloud.folder</field>
+        <field name="arch" type="xml">
+            <form string="Folder" simple="1">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="user_id" />
+                        </group>
+                        <group>
+                            <field name="create_date" />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="owncloud_folder_action">
+        <field name="name">Folders</field>
+        <field name="res_model">owncloud.folder</field>
+        <field name="view_id" ref="owncloud_folder_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_owncloud_folder" name="Folders" action="owncloud_folder_action" parent="menu_owncloud" sequence="1" />
+
+    <!-- owncloud connector -->
+    <record id="owncloud_connector_tree" model="ir.ui.view">
+        <field name="name">owncloud.connector.view.tree</field>
+        <field name="model">owncloud.connector</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="domain"/>
+                <field name="user_name"/>
+                <field name="active" widget="boolean_toggle" />
+            </tree>
+        </field>
+    </record>
+    <record id="owncloud_connector_view" model="ir.ui.view">
+        <field name="name">owncloud.connector.view.form</field>
+        <field name="model">owncloud.connector</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="user_name" />
+                            <field name="active" widget="boolean_toggle" />
+                        </group>
+                        <group>
+                            <field name="domain" />
+                            <field name="user_pwd" password="True"/>
+                            <button name="test_connection" type="object" string="Test Connection" icon="fa-television"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="owncloud_connector_action">
+        <field name="name">Connector</field>
+        <field name="res_model">owncloud.connector</field>
+        <field name="view_id" ref="owncloud_connector_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_owncloud_connector" name="Connector" action="owncloud_connector_action" parent="menu_owncloud" sequence="20" />
+</odoo>
